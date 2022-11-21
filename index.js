@@ -1,9 +1,11 @@
 let upload = document.getElementById('upload');
+let valCount = document.querySelector('.test');
+let valCount1 = document.querySelector('.test1');
 upload.addEventListener('change',()=>{
     let fr = new FileReader();
     fr.readAsText(upload.files[0]);
     fr.onload = function(){
-        let Arr = fr.result.split(/r?\n | \n/).map(e =>{
+        let Arr = fr.result.split(/r?\n|\n/).map(e =>{
             return e.split(',');
         });
         Window.valNo = 0;
@@ -12,32 +14,33 @@ upload.addEventListener('change',()=>{
         Arr.forEach(e =>{
             let em = String(e);
             let m = e.map(e=>{
-                return `<td>${e}</td>`;
-
+                return e;
             })
-            let creEle = document.createElement("tr");
-            creEle.innerHTML = m;
-            console.log("ok")
-            if(em != ""){
-                if(em.charAt(em.length - 4)=='.'){
-                    document.querySelector("table#val").appendChild(creEle);
-                    Window.valMail.push(em);
-                    Window.valNo = Window.valNo +1
-                    return false;
-                }
-                else if(em.charAt(em.length - 3)=='.'){
-                    document.querySelector("table#val").appendChild(creEle);
-                    Window.valMail.push(em);
-                    Window.valNo = Window.valNo +1
-                    return false;
-                }
-                else{
-                    document.querySelector("table#val").appendChild(creEle);
-                   invalNo = invalNo + 1;
-                   return false;
-                }
+            valCount.innerHTML = m + "1"
+            valCount1 .innerHTML = e + "1"
+            // let creEle = document.createElement("tr");
+            // creEle.innerHTML = m;
+            // console.log("ok")
+            // if(em != ""){
+            //     if(em.charAt(em.length - 4)=='.'){
+            //         document.querySelector("table#val").appendChild(creEle);
+            //         Window.valMail.push(em);
+            //         Window.valNo = Window.valNo +1
+            //         return false;
+            //     }
+            //     else if(em.charAt(em.length - 3)=='.'){
+            //         document.querySelector("table#val").appendChild(creEle);
+            //         Window.valMail.push(em);
+            //         Window.valNo = Window.valNo +1
+            //         return false;
+            //     }
+            //     else{
+            //         document.querySelector("table#val").appendChild(creEle);
+            //        invalNo = invalNo + 1;
+            //        return false;
+            //     }
 
-            }
+            // }
         })
         document.querySelector("#valCount").innerHTML = Window.valNo;
         document.querySelector("#invalCount").innerHTML = invalNo;
